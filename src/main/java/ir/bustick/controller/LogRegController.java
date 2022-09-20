@@ -5,6 +5,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/home")
 public class LogRegController {
@@ -12,6 +17,7 @@ public class LogRegController {
     @RequestMapping(method = RequestMethod.GET)
 
     public String firstPage(ModelMap model){
+
         return "login-register";
     }
 
