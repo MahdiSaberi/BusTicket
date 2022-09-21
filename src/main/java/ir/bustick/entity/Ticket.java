@@ -1,8 +1,6 @@
 package ir.bustick.entity;
 
 import ir.bustick.entity.generator.TravelIDGen;
-import ir.bustick.entity.loc.DateAPI;
-import ir.bustick.entity.loc.TimeAPI;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,16 +16,16 @@ public class Ticket {
 
     private String dest;
 
-    private DateAPI date;
+    private String date;
 
-    private TimeAPI time;
+    private String time;
 
     private String travelID = TravelIDGen.generate();
 
     public Ticket() {
     }
 
-    public Ticket(String orig, String dest, DateAPI date, TimeAPI time) {
+    public Ticket(String orig, String dest, String date, String time) {
         this.orig = orig;
         this.dest = dest;
         this.date = date;
@@ -60,19 +58,19 @@ public class Ticket {
         this.dest = dest;
     }
 
-    public DateAPI getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(DateAPI date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public TimeAPI getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(TimeAPI time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

@@ -13,10 +13,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TicketRepositoryImpl implements TicketRepository {
+public class TicketRepositoryImpl extends TransactionRepositoryImpl implements TicketRepository {
 
-    @Autowired
     private EntityManager entityManager;
+
+    public TicketRepositoryImpl(EntityManager entityManager) {
+        super(entityManager);
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Ticket save(Ticket ticket) {
@@ -32,6 +36,7 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public Ticket findById(Long id) {
+        System.out.println("HERE");
         Ticket ticket = entityManager.find(Ticket.class, id);
         return ticket;
     }
@@ -51,5 +56,23 @@ public class TicketRepositoryImpl implements TicketRepository {
     public void deleteById(Long id) {
         Ticket ticket = findById(id);
         entityManager.remove(ticket);
+    }
+
+    @Override
+    public List<Ticket> findByODD(String origin, String destination, String date) {
+
+        List<Ticket> tickets = entityManager.createQuery("select t from Ticket t where t.date =: date and t.orig =: origin and t.dest =: dest",Ticket.class)
+                .setParameter("date",date)
+                .setParameter("origin",origin)
+                .setParameter("dest",destination).getResultList();
+
+        return tickets;
+    }
+
+    @Override
+    public Ticket findByTravelId(String travelId) {
+        Ticket ticket = entityManager.createQuery("select t from Ticket t where t.travelID=:travelId",Ticket.class).setParameter("travelId",travelId).getSingleResult();
+
+        return ticket;
     }
 }

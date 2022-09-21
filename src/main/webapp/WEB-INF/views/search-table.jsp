@@ -1,3 +1,6 @@
+<%@ page import="ir.bustick.entity.Ticket" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ir.bustick.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
@@ -8027,7 +8030,7 @@ h1 {
     <div class="collapse navbar-collapse" id="ftco-nav">
     <ul class="navbar-nav ml-auto mr-md-3">
       <li class="nav-item active"><a href="#" class="nav-link">جستجوی بلیط</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">بلیط های من</a></li>
+      <li class="nav-item"><a href="/usertickets" class="nav-link">بلیط های من</a></li>
       <li class="nav-item"><a href="#" class="nav-link">خروج</a></li>
     </ul>
     </div>
@@ -8049,36 +8052,56 @@ h1 {
         </thead>
         <tbody>
         <tr>
-            <td>
-                
-<div class="box">
-  <a class="button-24" href="#popup1">خرید</a>
-</div>
-<div id="popup1" class="overlay">
-  <div class="popup">
-    <br>
-    <input type="text" placeholder="نام مسافر" class="form-control" dir="rtl">
-    <br>
-    <br>
-    <select name="" id="" class="form-control" dir="rtl">
-      <option value="1">جنسیت</option>
-      <option value="2">مرد</option>
-      <option value="2">زن</option>
-    </select>
-    <br><br>
-    <a class="button-24">تایید</a>
-    <a class="close" href="#">&times;</a>
 
-  </div>
-</div>
+            <%
+            List<Ticket> tickets = (List<Ticket>) session.getAttribute("tickets");
+            for(Ticket ticket: tickets){
+                String origin = ticket.getOrig();
+                String destination = ticket.getDest();
+                String date = ticket.getDate();
+                String time = ticket.getTime();
+                String travelId = ticket.getTravelID();
+                String btnId = "#t" + ticket.getTravelID();
+                String popupId = "t" + ticket.getTravelID();
 
-            </td>
-            <td>Content 2</td>
-            <td>Content 3</td>
-            <td>Content 4</td>
-            <td>Content 5</td>
-            <td>Content 6</td>
+                session.setAttribute("travelID",ticket.getTravelID());
+        %>
+        <tr>
+        <td>
+            <div class="box">
+                <a class="button-24" href="<%out.print(btnId);%>">خرید</a>
+            </div>
+
+            <div id="<%out.print(popupId);%>" class="overlay">
+                <div class="popup">
+                    <br>
+                    <form action="/ticket" method="post">
+                    <input type="text" name="name" placeholder="نام مسافر" class="form-control" dir="rtl">
+                    <br>
+                    <br>
+                    <select name="gender" class="form-control" dir="rtl">
+                        <option value="none" name="gender">جنسیت</option>
+                        <option value="male" name="gender">مرد</option>
+                        <option value="female" name="gender">زن</option>
+                    </select>
+                    <br><br>
+                    <input class="button-24" type="submit" value="تایید"></input>
+                    </form>
+                    <a class="close" href="#">&times;</a>
+                </div>
+            </div>
+        </td>
+
+        <td><%out.print(travelId);%></td>
+        <td><%out.print(time);%></td>
+        <td><%out.print(date);%></td>
+        <td><%out.print(destination);%></td>
+        <td><%out.print(origin);%></td>
         </tr>
+
+            <%
+            }
+        %>
         
         <tbody>
     </table>

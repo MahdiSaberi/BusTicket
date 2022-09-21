@@ -23,9 +23,15 @@
 </head>
 <body>
     <div class="box">
-        جناب آقای اصغر اصغری، رزرو با موفقیت انجام شد
+        <%
+            String message = (String) session.getAttribute("message");
+            out.print(message);
+        %>
         <br>
-        شناسه بلیط: 123
+        <%
+            String travelId = (String) session.getAttribute("travelID");
+            out.print("شناسه بلیط: "+travelId);
+        %>
         <br>
         <a href="www.google.com">بازگشت</a>
     </div>

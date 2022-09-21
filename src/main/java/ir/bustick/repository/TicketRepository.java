@@ -4,7 +4,7 @@ import ir.bustick.entity.Ticket;
 
 import java.util.List;
 
-public interface TicketRepository {
+public interface TicketRepository extends TransactionRepository {
     Ticket save(Ticket ticket);
     Ticket update(Ticket ticket);
 
@@ -13,4 +13,7 @@ public interface TicketRepository {
 
     void delete(Ticket ticket);
     void deleteById(Long id);
+
+    List<Ticket> findByODD(String origin,String destination,String date);
+    Ticket findByTravelId(String travelId);
 }

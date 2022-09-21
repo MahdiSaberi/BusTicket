@@ -12,7 +12,7 @@ public class Owner {
 
     private String name;
 
-    private Gender gender;
+    private String gender;
 
     @OneToOne
     private Ticket ticket;
@@ -23,7 +23,12 @@ public class Owner {
     public Owner() {
     }
 
-    public Owner(String name, Gender gender,User user) {
+    public Owner(String name, String gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public Owner(String name, String gender, User user) {
         this.name = name;
         this.gender = gender;
         this.user = user;
@@ -45,11 +50,11 @@ public class Owner {
         this.name = name;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

@@ -5,7 +5,7 @@ import ir.bustick.entity.Owner;
 
 import java.util.List;
 
-public interface OwnerRepository {
+public interface OwnerRepository extends TransactionRepository {
     Owner save(Owner owner);
     Owner update(Owner owner);
 
@@ -14,4 +14,6 @@ public interface OwnerRepository {
 
     void delete(Owner owner);
     void deleteById(Long id);
+
+    List<Owner> findByUserId(Long id);
 }

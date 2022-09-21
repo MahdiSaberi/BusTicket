@@ -98,6 +98,44 @@ button:hover{
 	transform: scale(.6);
 }
 
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+		}
+
+		/* The Close Button */
+		.close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
 	</style>
 	<!-- <link rel="stylesheet" type="text/css" href="slide navbar style.css"> -->
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
@@ -108,7 +146,7 @@ button:hover{
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup" dir="rtl">
-				<form>
+				<form action="/users/signup" method="post">
 					<label for="chk" aria-hidden="true">ثبت نام</label>
 					<input type="text" name="username" placeholder="نام کاربری" required="">
 					<input type="text" name="firstName" placeholder="نام" required="">
@@ -119,13 +157,49 @@ button:hover{
 			</div>
 
 			<div class="login" dir="rtl">
-				<form>
+				<form action="/users" method="post">
 					<label for="chk" aria-hidden="true">ورود</label>
 					<input type="text" name="username" placeholder="نام کاربری" required="">
 					<input type="password" name="password" placeholder="رمز عبور" required="">
-					<button>ورود</button>
+					<button id="myBtn">ورود</button>
+					<%
+						if(session.getAttribute("error") != null){
+					%>
+
+					<div id="myModal" class="modal">
+
+						<div class="modal-content">
+							<span class="close">&times;</span>
+							<p>نام کاربری یا رمزعبور نادرست است!</p>
+						</div>
+
+					</div>
+
+					<%
+						}%>
 				</form>
 			</div>
 	</div>
 </body>
+<script>
+	var modal = document.getElementById("myModal");
+
+	var btn = document.getElementById("myBtn");
+
+	var span = document.getElementsByClassName("close")[0];
+
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
 </html>

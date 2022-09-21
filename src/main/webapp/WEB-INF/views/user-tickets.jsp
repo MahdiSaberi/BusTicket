@@ -1,3 +1,8 @@
+<%@ page import="ir.bustick.entity.Ticket" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ir.bustick.entity.Owner" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="ir.bustick.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <head>
@@ -7975,6 +7980,7 @@ h2{
         <li class="nav-item"><a href="#" class="nav-link">خروج</a></li>
       </ul>
       </div>
+    </div>
     </nav>
 
 <h2>بلیط‌های من</h2>
@@ -8003,5 +8009,46 @@ h2{
         </tr>
         
         <tbody>
+
+            <%
+
+            List<Owner> owners = (List<Owner>) session.getAttribute("owners");
+            User user = (User) session.getAttribute("ticketUser");
+
+        for (Owner owner : owners) {
+            if (owner.getUser().getId() == user.getId()){
+                String name = owner.getName();
+                String origin = owner.getTicket().getOrig();
+                String destination = owner.getTicket().getDest();
+                String date = owner.getTicket().getDate();
+                String time = owner.getTicket().getTime();
+
+
+                String travelId = owner.getTicket().getTravelID();
+                String btnId = "#t" + owner.getTicket().getTravelID();
+                String popupId = "t" + owner.getTicket().getTravelID();
+                session.setAttribute("travelID",owner.getTicket().getTravelID());
+        %>
+    <tr>
+        <td>
+            <div class="box">
+                <button class="button-24" role="button">لغو</button>
+            </div>
+        </td>
+
+        <td><%out.print(travelId);%></td>
+<%--        <td><%out.print(travelId);%></td>--%>
+        <td><%out.print(name);%></td>
+        <td><%out.print(time);%></td>
+        <td><%out.print(date);%></td>
+        <td><%out.print(destination);%></td>
+        <td><%out.print(origin);%></td>
+    </tr>
+
+        <%
+            }
+            }
+        %>
+
     </table>
 </div>

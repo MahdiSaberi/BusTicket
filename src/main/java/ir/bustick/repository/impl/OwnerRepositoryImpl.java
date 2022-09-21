@@ -14,10 +14,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class OwnerRepositoryImpl implements OwnerRepository {
+public class OwnerRepositoryImpl extends TransactionRepositoryImpl implements OwnerRepository {
 
-    @Autowired
     private EntityManager entityManager;
+
+    public OwnerRepositoryImpl(EntityManager entityManager, EntityManager entityManager1) {
+        super(entityManager);
+        this.entityManager = entityManager1;
+    }
 
     @Override
     public Owner save(Owner owner) {
@@ -52,5 +56,11 @@ public class OwnerRepositoryImpl implements OwnerRepository {
     public void deleteById(Long id) {
         Owner owner = findById(id);
         entityManager.remove(owner);
+    }
+
+    @Override
+    public List<Owner> findByUserId(Long id) {
+        return entityManager.createQuery("select o from Owner o where o.user.id =: id",Owner.class)
+                .setParameter("id",id).getResultList();
     }
 }

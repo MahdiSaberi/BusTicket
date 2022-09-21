@@ -14,4 +14,6 @@ public interface OwnerService{
 
     void delete(Owner owner);
     void deleteById(Long id);
+
+    List<Owner> findByUserId(Long id);
 }

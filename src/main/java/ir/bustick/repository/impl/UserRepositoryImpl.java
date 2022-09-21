@@ -3,23 +3,23 @@ package ir.bustick.repository.impl;
 import ir.bustick.entity.User;
 import ir.bustick.repository.UserRepository;
 import jakarta.persistence.EntityManager;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl extends TransactionRepositoryImpl implements UserRepository {
 
-//    @Autowired
-//    private SessionFactory entityManager;
-
-    @Autowired
     private EntityManager entityManager;
 
+    public UserRepositoryImpl(EntityManager entityManager, EntityManager entityManager1) {
+        super(entityManager);
+        this.entityManager = entityManager1;
+    }
+
     @Override
+//    @Transactional
     public User save(User user) {
         entityManager.persist(user);
         return user;
@@ -53,4 +53,17 @@ public class UserRepositoryImpl implements UserRepository {
         User user = findById(id);
         entityManager.remove(user);
     }
+
+    @Override
+    public User findByUserAndPassword(String username, String password) {
+        return entityManager.createQuery("select u from User u where u.username =: username and u.password =: password",User.class)
+                .setParameter("username",username).setParameter("password",password).getSingleResult();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return entityManager.createQuery("select u from User u where u.username =: username",User.class)
+                .setParameter("username",username).getSingleResult();
+    }
+
 }

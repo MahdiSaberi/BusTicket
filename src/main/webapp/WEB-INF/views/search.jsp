@@ -138,22 +138,24 @@
 </head>
 <div class="form">
     <div class="title">جستجوی بلیط</div>
-<%--    <div class="subtitle">Let's create your account!</div>--%>
+
+    <form action="/searchform" method="post">
     <div class="input-container ic1">
-        <input id="firstname" class="input" type="text" placeholder=" " />
+        <input id="origin" name="orig" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
-        <label for="firstname" class="placeholder">مبدا</label>
+        <label for="origin" class="placeholder">مبدا</label>
     </div>
     <div class="input-container ic2">
-        <input id="lastname" class="input" type="text" placeholder=" " />
+        <input id="destination" name="dest" class="input" type="text" placeholder=" " />
         <div class="cut"></div>
-        <label for="lastname" class="placeholder">مقصد</label>
+        <label for="destination" class="placeholder">مقصد</label>
     </div>
     <div class="input-container ic2">
-        <input id="dates" class="input" type="date" />
+        <input id="date" name="date" class="input" type="date" />
         <div class="cut cut-short"></div>
-        <label for="dates" class="placeholder">تاریخ</label>
+        <label for="date" class="placeholder" >تاریخ</label>
     </div>
     <button type="text" class="submit">جستجو</button>
+    </form>
 </div>
 </html>

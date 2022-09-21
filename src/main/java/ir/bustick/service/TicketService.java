@@ -15,4 +15,7 @@ public interface TicketService {
 
     void delete(Ticket ticket);
     void deleteById(Long id);
+
+    List<Ticket> findByODD(String origin,String destination,String date);
+    Ticket findByTravelId(String travelId);
 }
