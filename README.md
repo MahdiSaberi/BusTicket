@@ -1,3 +1,3 @@
 # BusTick
 
-Web Application for Ticket booking + (Spring MVC + JSP)
+Web Application for Ticket booking. (Spring MVC + JSP)
