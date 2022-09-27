@@ -7975,9 +7975,9 @@ h2{
   
       <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto mr-md-3">
-        <li class="nav-item"><a href="#" class="nav-link">جستجوی بلیط</a></li>
+        <li class="nav-item"><a href="/searchform" class="nav-link">جستجوی بلیط</a></li>
         <li class="nav-item active"><a href="#" class="nav-link">بلیط‌ های من</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">خروج</a></li>
+        <li class="nav-item"><a href="/users" class="nav-link">خروج</a></li>
       </ul>
       </div>
     </div>
@@ -7997,16 +7997,6 @@ h2{
             <th>مبدا</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><button class="button-24" role="button">لغو</button></td>
-            <td>Content 1</td>
-            <td>Content 2</td>
-            <td>Content 3</td>
-            <td>Content 4</td>
-            <td>Content 5</td>
-            <td>Content 6</td>
-        </tr>
         
         <tbody>
 
@@ -8031,9 +8021,11 @@ h2{
         %>
     <tr>
         <td>
+            <form action="/ticket/remove" method="post">
             <div class="box">
-                <button class="button-24" role="button">لغو</button>
+                <button class="button-24" role="button" name="travelRefund" value="<% out.print(owner.getId()); %>">لغو</button>
             </div>
+            </form>
         </td>
 
         <td><%out.print(travelId);%></td>

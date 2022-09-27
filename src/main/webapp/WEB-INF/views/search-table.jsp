@@ -8029,9 +8029,9 @@ h1 {
 
     <div class="collapse navbar-collapse" id="ftco-nav">
     <ul class="navbar-nav ml-auto mr-md-3">
-      <li class="nav-item active"><a href="#" class="nav-link">جستجوی بلیط</a></li>
+      <li class="nav-item active"><a href="/searchform" class="nav-link">جستجوی بلیط</a></li>
       <li class="nav-item"><a href="/usertickets" class="nav-link">بلیط های من</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">خروج</a></li>
+      <li class="nav-item"><a href="/users" class="nav-link">خروج</a></li>
     </ul>
     </div>
   </div>
@@ -8060,11 +8060,11 @@ h1 {
                 String destination = ticket.getDest();
                 String date = ticket.getDate();
                 String time = ticket.getTime();
-                String travelId = ticket.getTravelID();
+//                String travelId = ticket.getTravelID();
                 String btnId = "#t" + ticket.getTravelID();
-                String popupId = "t" + ticket.getTravelID();
+                String popupId = ticket.getTravelID();
 
-                session.setAttribute("travelID",ticket.getTravelID());
+//                session.setAttribute("travelID",ticket.getTravelID());
         %>
         <tr>
         <td>
@@ -8072,10 +8072,11 @@ h1 {
                 <a class="button-24" href="<%out.print(btnId);%>">خرید</a>
             </div>
 
-            <div id="<%out.print(popupId);%>" class="overlay">
+            <div id="<%out.print("t"+popupId);%>" class="overlay">
                 <div class="popup">
                     <br>
                     <form action="/ticket" method="post">
+
                     <input type="text" name="name" placeholder="نام مسافر" class="form-control" dir="rtl">
                     <br>
                     <br>
@@ -8085,14 +8086,15 @@ h1 {
                         <option value="female" name="gender">زن</option>
                     </select>
                     <br><br>
-                    <input class="button-24" type="submit" value="تایید"></input>
+<%--                    <input class="button-24" type="submit" value="تایید"></input>--%>
+                        <button type="submit" class="button-24" value="<% out.print(popupId); %>" name="travelID">تایید</button>
                     </form>
                     <a class="close" href="#">&times;</a>
                 </div>
             </div>
         </td>
 
-        <td><%out.print(travelId);%></td>
+        <td><%out.print(popupId);%></td>
         <td><%out.print(time);%></td>
         <td><%out.print(date);%></td>
         <td><%out.print(destination);%></td>

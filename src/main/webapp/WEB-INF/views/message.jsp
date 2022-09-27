@@ -29,11 +29,11 @@
         %>
         <br>
         <%
-            String travelId = (String) session.getAttribute("travelID");
+            String travelId = request.getParameter("travelID");
             out.print("شناسه بلیط: "+travelId);
         %>
         <br>
-        <a href="www.google.com">بازگشت</a>
+        <a href="/ticket">بازگشت</a>
     </div>
 </body>
 </html>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -39,9 +41,9 @@ public class TicketController {
     }
 
     @PostMapping("")
-    public String showTickets(@ModelAttribute("owner") Owner owner, HttpSession session){
+    public String showTickets(@ModelAttribute("owner") Owner owner, HttpSession session, HttpServletRequest request){
 
-        String travelID = (String) session.getAttribute("travelID");
+        String travelID = request.getParameter("travelID");
 
         User userNullId = (User) session.getAttribute("user");
 
@@ -53,7 +55,8 @@ public class TicketController {
         ownerService.save(owner1);
 
         String name = owner.getName();
-        String gender = null;
+
+        String gender;
         if(owner.getGender().equals("male"))
             gender = "Mr.";
         else
@@ -66,5 +69,12 @@ public class TicketController {
 
         return "message";
 
+    }
+
+    @PostMapping("/remove")
+    public String refund(HttpServletRequest request){
+        Long ownerId = Long.valueOf(request.getParameter("travelRefund"));
+        ownerService.deleteById(ownerId);
+        return "redirect:/usertickets";
     }
 }

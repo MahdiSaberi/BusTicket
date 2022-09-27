@@ -34,12 +34,9 @@ public class SearchFormController {
     @PostMapping("")
     public String showTickets(@ModelAttribute("ticket") Ticket ticket, HttpSession session){
 
-        System.out.println("THISIS DATE: "+ticket.getDate());
-
         try {
             List<Ticket> tickets = ticketService.findByODD(ticket.getOrig(),ticket.getDest(), ticket.getDate());
             session.setAttribute("tickets",tickets);
-            System.out.println("ORIG: "+ticket.getOrig());
         }catch (Exception e){
             e.printStackTrace();
             return "redirect:/searchform";
