@@ -8031,7 +8031,7 @@ h1 {
     <ul class="navbar-nav ml-auto mr-md-3">
       <li class="nav-item active"><a href="/searchform" class="nav-link">جستجوی بلیط</a></li>
       <li class="nav-item"><a href="/usertickets" class="nav-link">بلیط های من</a></li>
-      <li class="nav-item"><a href="/users" class="nav-link">خروج</a></li>
+      <li class="nav-item"><a href="/users/logout" class="nav-link">خروج</a></li>
     </ul>
     </div>
   </div>

@@ -30,6 +30,10 @@ public class UserTicketController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String userTickets(HttpSession session){
+
+        if (session.getAttribute("user") == null)
+            return "access-denied";
+
         List<Owner> owners = ownerService.findAll();
         session.setAttribute("owners",owners);
         System.out.println("SIZEOF: "+owners.size());

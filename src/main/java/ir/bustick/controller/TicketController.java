@@ -36,6 +36,9 @@ public class TicketController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String ticketTable(Model model,HttpSession session){
+        if (session.getAttribute("user") == null)
+            return "access-denied";
+
         List<Ticket> tickets = (List<Ticket>) session.getAttribute("tickets");
         return "search-table";
     }

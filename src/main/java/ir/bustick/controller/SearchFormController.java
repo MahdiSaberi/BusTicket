@@ -26,6 +26,10 @@ public class SearchFormController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showSearchForm(Model model, HttpSession session){
+
+        if (session.getAttribute("user") == null)
+            return "access-denied";
+
         User user = (User) session.getAttribute("user");
 
         return "search";
@@ -33,6 +37,8 @@ public class SearchFormController {
 
     @PostMapping("")
     public String showTickets(@ModelAttribute("ticket") Ticket ticket, HttpSession session){
+        if (session.getAttribute("user") == null)
+            return "access-denied";
 
         try {
             List<Ticket> tickets = ticketService.findByODD(ticket.getOrig(),ticket.getDest(), ticket.getDate());

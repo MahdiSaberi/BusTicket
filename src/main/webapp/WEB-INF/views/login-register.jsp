@@ -157,7 +157,7 @@ button:hover{
 			</div>
 
 			<div class="login" dir="rtl">
-				<form action="/users" method="post">
+				<form action="/users/login" method="post">
 					<label for="chk" aria-hidden="true">ورود</label>
 					<input type="text" name="username" placeholder="نام کاربری" required="">
 					<input type="password" name="password" placeholder="رمز عبور" required="">
